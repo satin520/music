@@ -5,8 +5,15 @@
 ## Build Setup
 
 ``` bash
+# 首先
+下载或克隆到本地
+
+# 进入项目根目录
+cd music
+
 # install dependencies
 npm install
+npm install --save axios
 
 # serve with hot reload at localhost:8080
 npm run dev
