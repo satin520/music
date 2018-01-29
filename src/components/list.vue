@@ -2,7 +2,7 @@
 	<div id="list" :class="{ ftBox: $store.state.isPlayer }">
 		<headNav></headNav>
 		<swiper :options="swiperOption" ref="mySwiper" class="mySwiper">
-			<swiper-slide v-for="item in songs.banner">
+			<swiper-slide v-for="item in songs.banner" >
 				<a :href="item.extra.tourl"><img :src="item.imgurl" /></a>
 			</swiper-slide>
 			<div class="swiper-pagination" slot="pagination"></div>
@@ -33,14 +33,15 @@
 					pagination: {
 						el: '.swiper-pagination'
 					},
-					loop: true
+					loop: true,
+					width:window.innerWidth
 				},
 				songs: [],
 				list:[],
 				isloading: true
 			}
 		},
-		created() {
+		activated() {
 			this.getList();
 		},
 		methods: {
