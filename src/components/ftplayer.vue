@@ -14,7 +14,8 @@
 			<a class="icon-download" :href="$store.state.cursong.play_url" download='music'></a>
 		</div>
 		<audio :src="$store.state.cursong.play_url" :autoplay="play" ref="player" @ended="next" ></audio>
-		<div class="panel-play" v-show="playBox">
+		<transition name='topTrans'>
+		<div class="panel-play" v-if="playBox">
 			<div class="panel-play-content">
 				<div class="logo"></div>
 				<div class="panel-play-img-box" :class="{play:!play}" @click="playMusic">
@@ -25,7 +26,6 @@
 				</div>
 				<div class="panel-play-title">{{$store.state.cursong.song_name}} - <b>{{$store.state.cursong.author_name}}</b></div>
 				<div class="paner-play-lrc">
-					
 					<div class="lrc-roll" ref="lrcRoll" :style="{marginTop:mTop}">
 						<p v-for="(item,index) in $store.state.lrcArr.lrc" :class="{on:index===$store.state.playIndex-1}">{{item}}</p>
 					</div>
@@ -37,6 +37,7 @@
 			</div>
 			<div class="play-bg" :style="{backgroundImage: 'url(' + $store.state.cursong.img + ')'}"></div>
 		</div>
+		</transition>
 	</div>
 </template>
 <script>
@@ -88,6 +89,17 @@
 </script>
 
 <style scoped>
+	.topTrans-enter-active,.topTrans-leave-active{
+		transition: all .3s;
+	}
+	.topTrans-enter{
+		margin-top: 100%;
+		opacity: 0;
+	}
+	.topTrans-leave-to{
+		margin-top: 150%;
+		opacity: 0;
+	}
 	.ft-player {
 		position: fixed;
 		z-index: 99;
@@ -201,7 +213,7 @@
 	}
 	
 	.panel-play-content {
-		position: fixed;
+		position: absolute;
 		left: 0;
 		top: 0;
 		height: 100%;
